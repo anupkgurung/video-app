@@ -1,6 +1,8 @@
 
+import React from "react";
+
 export const Input = ({ 
-    id, type, onChangeHandler=()=>{}, value="", placeholder="", 
+    id, title, type, onChangeHandler=()=>{}, value="", placeholder="", 
     hasAutoComplete=false,isRequired=false
     }) => {
 
@@ -15,11 +17,13 @@ export const Input = ({
             )
             break;
 
-        case "generic":
+        case "email":
+        case "text":
+        case "password":
             return (
                 <div className="flex-col padding-top-4">
-                    <label className="margin-btm-2" htmlFor={id}>{title}</label>
-                    <input className="input-width" autoComplete={hasAutoComplete ? "on" : "off"}
+                    <label className="margin-btm-2 mr-auto" htmlFor={id}>{title}</label>
+                    <input className="input-width w-100" autoComplete={hasAutoComplete ? "on" : "off"}
                         type={type} name={id} id={id} placeholder={placeholder}
                         required={isRequired} onChange={onChangeHandler} value={value} />
                 </div>
@@ -28,7 +32,7 @@ export const Input = ({
             
         default:
             return (
-                <input className="input-width" autoComplete={hasAutoComplete ? "on" : "off"}
+                <input className="input-width w-100" autoComplete={hasAutoComplete ? "on" : "off"}
                     type={type} name={id} id={id} placeholder={placeholder}
                     required={isRequired} onChange={onChangeHandler} value={value} />
             )
