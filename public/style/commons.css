@@ -92,3 +92,12 @@
 .relative {
     position: relative;
 }
+.flex {
+    display: flex;
+}
+.flex-col {
+    flex-direction: column;
+}
+.pl-2 {
+    padding-left : 2rem;
+}

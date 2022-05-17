@@ -146,3 +146,22 @@
         padding : 0rem 5rem;
     }
 }
+
+.chip-item {
+    background-color: #dddbdb;
+    display: flex;
+    align-items: center;
+    margin: 0 0.3rem 0rem 0.2rem;
+    padding: .75rem;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    height: 2rem;
+}
+.chip {
+    background-color: #efefef;
+    display: flex;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    flex-wrap: wrap;
+}
