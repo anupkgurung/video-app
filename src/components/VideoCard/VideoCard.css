@@ -1,0 +1,7 @@
+.video-card-container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+.w-20 {
+    width : 20rem
+}

@@ -158,10 +158,16 @@
     height: 2rem;
 }
 .chip {
-    background-color: #efefef;
+    /* background-color: #efefef; */
     display: flex;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
     flex-wrap: wrap;
+}
+.video-list-sidebar {
+    min-width: 15rem;
+}
+.video-list-main {
+    min-width: 65rem;
 }
