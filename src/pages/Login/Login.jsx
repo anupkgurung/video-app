@@ -44,7 +44,7 @@ export const Login = () => {
                     id="email"
                     title="Email"
                     type="email"
-                    onChange={handleChange}
+                    onChangeHandler={handleChange}
                     value={userCredentials.email}
                     placeholder="username@email.com"
                     hasAutoComplete={false}
@@ -59,8 +59,8 @@ export const Login = () => {
                     <Input
                         id="password"
                         title="Password"
-                        type=""
-                        onChange={handleChange}
+                        type="password"
+                        onChangeHandler={handleChange}
                         value={userCredentials.password}
                         placeholder="password"
                         hasAutoComplete={false}

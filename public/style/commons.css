@@ -101,3 +101,24 @@
 .pl-2 {
     padding-left : 2rem;
 }
+.justify-content-spc-btwn {
+    justify-content: space-between;
+}
+.align-item-center {
+    align-items: center;
+}
+.text-initial {
+    text-align: initial;
+}
+.justify-content-center {
+    justify-content : center
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.pd-btm {
+    padding-bottom: 1rem;
+}
+.display-none {
+    display : none;
+}

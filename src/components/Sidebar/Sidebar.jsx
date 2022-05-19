@@ -10,7 +10,7 @@ export const Sidebar = () => {
                         <li key={path} className="list-item ml-2 pd-2">
                             <NavLink to={path}></NavLink>
                             <span className="material-icons">{icon}</span>
-                            {name}
+                            <span className="ml-3">{name}</span>
                         </li>
                     ))}
                 </ul>
