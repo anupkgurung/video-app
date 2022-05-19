@@ -19,7 +19,6 @@ export const Input = ({
 
         case "email":
         case "text":
-        case "password":
             return (
                 <div className="flex-col padding-top-4">
                     <label className="margin-btm-2 mr-auto" htmlFor={id}>{title}</label>
@@ -30,7 +29,7 @@ export const Input = ({
             )
             break;
             
-        default:
+        case "password":
             return (
                 <input className="input-width w-100" autoComplete={hasAutoComplete ? "on" : "off"}
                     type={type} name={id} id={id} placeholder={placeholder}

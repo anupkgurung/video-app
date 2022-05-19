@@ -51,7 +51,7 @@ export const Signup = () => {
                     id="firstName"
                     title="First Name"
                     type="text"
-                    onChange={handleChange}
+                    onChangeHandler={handleChange}
                     value={userCredentials.firstName}
                     placeholder="First Name"
                     hasAutoComplete={false}
@@ -62,7 +62,7 @@ export const Signup = () => {
                     id="lastName"
                     title="Last Name"
                     type="text"
-                    onChange={handleChange}
+                    onChangeHandler={handleChange}
                     value={userCredentials.lastName}
                     placeholder="Last Name"
                     hasAutoComplete={false}
@@ -73,7 +73,7 @@ export const Signup = () => {
                     id="email"
                     title="Email"
                     type="email"
-                    onChange={handleChange}
+                    onChangeHandler={handleChange}
                     value={userCredentials.email}
                     placeholder="username@email.com"
                     hasAutoComplete={false}
@@ -84,7 +84,7 @@ export const Signup = () => {
                     id="password"
                     title="Password"
                     type={showPassword ? "text" : "password"}
-                    onChange={handleChange}
+                    onChangeHandler={handleChange}
                     value={userCredentials.password}
                     placeholder="Enter your password"
                     hasAutoComplete={false}
@@ -95,7 +95,7 @@ export const Signup = () => {
                     id="confirmPassword"
                     title="Confirm Password"
                     type={showPassword ? "text" : "password"}
-                    onChange={handleChange}
+                    onChangeHandler={handleChange}
                     value={userCredentials.confirmPassword}
                     placeholder="Confirm your password"
                     hasAutoComplete={false}
@@ -106,7 +106,7 @@ export const Signup = () => {
                     id="show-password"
                     title="Show Password"
                     type="checkbox"
-                    onChange={handleShowPassword}
+                    onChangeHandler={handleShowPassword}
                 />
 
                 <button onClick={handleSignup} className="btn btn-primary w-100 login-btn">Create Account</button>    

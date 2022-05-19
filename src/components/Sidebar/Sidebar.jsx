@@ -4,13 +4,13 @@ import { tempDataSidebar }  from "../../tempData";
 export const Sidebar = () => {
     return (
         <>
-            <aside>
+            <aside className="video-list-sidebar pd-5">
                 <ul>
                     {tempDataSidebar.map(({path, name, icon}) => (
-                        <li key={path} className="list-item ml-2">
+                        <li key={path} className="list-item ml-2 pd-2">
                             <NavLink to={path}></NavLink>
                             <span className="material-icons">{icon}</span>
-                            {name}
+                            <span className="ml-3">{name}</span>
                         </li>
                     ))}
                 </ul>
