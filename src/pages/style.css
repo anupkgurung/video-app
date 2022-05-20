@@ -146,7 +146,9 @@
         padding : 0rem 5rem;
     }
 }
-
+.ml-7 {
+    margin-left: 7rem
+}
 .chip-item {
     background-color: #dddbdb6b;
     display: flex;
