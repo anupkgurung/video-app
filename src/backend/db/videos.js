@@ -8,9 +8,9 @@ export const videos = [
   {
     _id: "Wo5dMEP_BbI",
     title: "Solo Adventure Ride through Namib Desert",
-    video: '',
+    video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/lAdvYM_Wtek" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
     thumbnail : 'https://i.ytimg.com/vi/lAdvYM_Wtek/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAZ83usv5QHGg2lWZwQApS62ppV6w',
-    view :"1M",
+    alt :"onherbike",
     creator: "onherbike",
     category : 'motorcycling'
   },

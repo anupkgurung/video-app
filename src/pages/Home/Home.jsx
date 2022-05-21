@@ -1,11 +1,11 @@
-import { Sidebar, VideoCard, Footer } from "../../components"
+import { Sidebar, VideoCard } from "../../components"
 import axios from "axios";
 import {useToast, useDocumentTitle} from "../../customHooks";
 import { useState, useEffect } from "react";
 import "../style.css";
 
 export const Home = ()=>{
-    useDocumentTitle("Signup");
+    useDocumentTitle("Home");
     const { showToast } = useToast();
     const [videoList, setVideoList] = useState([])
     const getAllVideos = async () => {
@@ -38,10 +38,10 @@ export const Home = ()=>{
                         {videoList && videoList.map(({_id,title,video,creator,thumbnail,alt})=>(
                             <VideoCard
                                 key ={_id}
-                                // id={_id}
+                                id={_id}
                                 title={title}
-                                video={video}
-                                thumnail={thumbnail}
+                                videoIframe={video}
+                                thumbnail={thumbnail}
                                 creator={creator}
                                 alt={alt}
                             />

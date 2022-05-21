@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./VideoCard.css"
 export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) => {
 
+    //MODAL -> This needs to be moved(refactored)
     const [modalVisible , setModalVisible] = useState(false);
     const openModal = () => {
         setModalVisible(true)
