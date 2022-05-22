@@ -1,0 +1,30 @@
+.m-8 {
+    margin: 2rem;
+}
+.ml-0 {
+    margin-left: 0;
+}
+.ml-1 {
+    margin-left: calc(1*0.25rem);
+}
+.ml-8 {
+    margin-left: calc(8*0.25rem);
+}
+.ml-auto {
+    margin-left: auto;
+}
+.margin-left-13 {
+    margin-left: calc(13* 0.5rem);
+}
+.ml-6 {
+    margin-left: calc(6* 0.5rem);
+}
+.margin-btm-2 {
+    margin-bottom: .5rem;
+}
+.margin-top-2 {
+    margin-top: .5rem;
+}
+.ml-7 {
+    margin-left: 7rem
+}
