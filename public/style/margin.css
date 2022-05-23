@@ -10,6 +10,9 @@
 .ml-8 {
     margin-left: calc(8*0.25rem);
 }
+.ml-10 {
+    margin-left: 10rem;
+}
 .ml-auto {
     margin-left: auto;
 }

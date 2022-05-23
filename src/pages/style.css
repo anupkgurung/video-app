@@ -74,7 +74,7 @@
     color: var(--royalblue-bg);
     font-weight: 200;
 }
-.aside {
+.position {
     position: fixed;
 }
 .product-card-container {

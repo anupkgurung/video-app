@@ -5,7 +5,7 @@ import App from "./App";
 
 import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
-import { AuthenticationProvider, WatchLaterProvider } from "./context";
+import { AuthenticationProvider, WatchLaterProvider, PlaylistProvider } from "./context";
 
 // Call make Server
 makeServer();
@@ -15,7 +15,9 @@ root.render(
     <BrowserRouter>
       <AuthenticationProvider>
         <WatchLaterProvider>
+          <PlaylistProvider>
           <App />
+          </PlaylistProvider>
         </WatchLaterProvider>
       </AuthenticationProvider>
     </BrowserRouter>

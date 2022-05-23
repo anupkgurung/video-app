@@ -1,13 +1,20 @@
-import { Sidebar, VideoCard } from "../../components"
+import { Sidebar, VideoCard, Input, Modal } from "../../components"
 import axios from "axios";
 import {useToast, useDocumentTitle} from "../../customHooks";
 import { useState, useEffect } from "react";
+import { usePlaylistContext } from "../../context";
+import { createNewPlaylist } from "../../Api";
 import "../style.css";
 
 export const Home = ()=>{
     useDocumentTitle("Home");
     const { showToast } = useToast();
-    const [videoList, setVideoList] = useState([])
+    const [videoList, setVideoList] = useState([]);
+    const {initialState, playlistDispatch} = usePlaylistContext() || {};
+    const { playlistTitle, isPlaylistModalVisible } = initialState;
+    const [playlist, setPlaylist] = useState();
+    
+
     const getAllVideos = async () => {
         try{
             const data = await axios.get("/api/videos")
@@ -20,7 +27,13 @@ export const Home = ()=>{
     useEffect(()=>{
         getAllVideos();
     },[])
-    
+
+    const setPlaylistTitle = (e) => {
+        playlistDispatch({
+            type :"SET_PLAYLIST_TITLE",
+            payload : e.target.value
+        })
+    }
 
     return (
         <>  
@@ -34,6 +47,7 @@ export const Home = ()=>{
                     <span className="chip-item">Motorcycling</span>
                     <span className="chip-item">Riding</span>
                 </div>
+              
                 <main className="video-card-container video-list-main pd-btm">
                         {videoList && videoList.map(({_id,title,video,creator,thumbnail,alt})=>(
                             <VideoCard
