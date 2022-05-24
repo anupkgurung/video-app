@@ -10,7 +10,7 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) =
     const [modalVisible, setModalVisible] = useState(false);
     const { initialState, playlistDispatch } = usePlaylistContext() || {};
     const { isPlaylistModalVisible } = initialState;
-    const video = {id, title, videoIframe, thumbnail, creator, alt};
+    const video = { id, title, videoIframe, thumbnail, creator, alt };
     const openModal = () => {
         setModalVisible(true)
     }

@@ -1,1 +1,1 @@
-export { createNewPlaylist, addVideoToPlaylist } from "./Playlist/playlistAPi";
+export { createNewPlaylist, addVideoToPlaylist, getVideosFromPlaylist } from "./Playlist/playlistAPi";
