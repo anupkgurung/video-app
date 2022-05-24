@@ -36,5 +36,12 @@ export const Input = ({
                     required={isRequired} onChange={onChangeHandler} value={value} />
             )
             break;
+        case "custom-checbox" :
+            return (
+                <>
+                    <input type="checkbox" id={id} className="checkbox" onChange={onChangeHandler} />
+                    <label className="pd-left" htmlFor={id}>{title}</label>
+                </>
+            )
     }
 }

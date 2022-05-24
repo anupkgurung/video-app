@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { Input, Footer } from "../../components";
 import { useAuthentication } from "../../context";
 import "../auth.css";
-import { useDocumentTitle } from "../../customHooks";
+import { useToast,useDocumentTitle } from "../../customHooks";
 
 
 export const Signup = () => {
     useDocumentTitle("Signup");
+    const { showToast } = useToast();
     const [showPassword, setShowPassword] = useState(false);
     const [userCredentials, setUserCredentials] = useState({
         firstName : "", lastName : "",password : "",email :"",
@@ -30,7 +31,7 @@ export const Signup = () => {
             setUserData(data);
             navigateTo("/")
         }catch({response}){
-            console.log(response.data.errors);
+            showToast("error","error on signup")
         }
     }
     const handleChange = (e) => {
