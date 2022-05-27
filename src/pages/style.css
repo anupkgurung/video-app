@@ -173,3 +173,82 @@
 .chip-item:hover {
     background-color: #dddbdb;
 }
+.flex {
+    display: flex;
+}
+.flex-col {
+    flex-direction: column;
+}
+.h-60 {
+    height: 60vh;
+}
+.block-size {
+    block-size : inherit
+}
+.no-border {
+    border: none;
+    background-color: transparent;
+}
+.justify-spc-btwn {
+    justify-content: space-between;
+}
+.justify-center {
+    justify-content : center
+}
+.justify-even {
+    justify-content: space-evenly;
+}
+.align-center {
+    align-items: center;
+}
+.text-initial {
+    text-align: initial;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.display-none {
+    display : none;
+}
+.absolute {
+    position: absolute;
+}
+
+.w-50 {
+    width: 50%;
+}
+.w-100vw {
+    width: 100vw;
+}
+.h-100vh {
+    height: 100vh;
+}
+.z-idx {
+    z-index: 999;
+}
+.input-no-bdr {
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: inherit;
+}
+.input-no-bdr:focus {
+    outline: none;
+}
+.boder-light {
+    border: 1px solid #0000003b;
+    border-top-width : 0px
+}
+.text-left {
+    text-align: left;
+}
+.modal-bg {
+    background-color: #0000008a;
+}
+.playlist-modal {
+    z-index: 1;
+    margin: 3rem;
+    border-radius: 7px;
+    position: relative;
+    background-color: var(--white);
+    box-shadow: 0rem 0.1rem 0.2rem var(--box-shadow);
+}

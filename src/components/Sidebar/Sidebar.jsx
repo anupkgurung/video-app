@@ -8,9 +8,9 @@ export const Sidebar = () => {
                 <ul>
                     {tempDataSidebar.map(({path, name, icon}) => (
                         <li key={path}>
-                            <NavLink to={path} className="link-style-none list-item ml-2 pd-2">
-                            <span className="material-icons">{icon}</span>
-                            <span className="ml-3">{name}</span>
+                            <NavLink to={path} className="link-style-none list-item ml-2 pd-2 cursor-pointer">
+                                <span className="material-icons">{icon}</span>
+                                <span className="ml-3">{name}</span>
                             </NavLink>
                         </li>
                     ))}
