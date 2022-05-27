@@ -30,13 +30,16 @@ export const Playlist = () => {
             <div className="flex">
                 <Sidebar />
                 <div className="flex flex-col pd-5 w-100 relative">
-                    <div className="ml-auto">
+                    <div className="flex justify-spc-btwn text-bold">
+                        <span></span>
+                        <h4>All Playlist</h4>
                         <span title="Create Playlist"
                             onClick={() => playlistDispatch({
                                 type: "SET_PLAYLIST_MODAL_VISIBLE",
                                 payload: isPlaylistModalVisible
                             })}
                             className="material-icons btn-primary btn-floating">add</span>
+                       
                     </div>
                     {playlist.length > 0 ?
                         <main className="video-card-container video-list-main pd-btm">

@@ -12,7 +12,8 @@ export const videos = [
     thumbnail : 'https://i.ytimg.com/vi/lAdvYM_Wtek/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAZ83usv5QHGg2lWZwQApS62ppV6w',
     alt :"onherbike",
     creator: "onherbike",
-    category : 'motorcycling'
+    category : 'motorcycling',
+    url : 'https://www.youtube.com/embed/lAdvYM_Wtek'
   },
   {
     _id: "F_Riqjdh2oM",
@@ -21,7 +22,8 @@ export const videos = [
     thumbnail : 'https://i.ytimg.com/vi/MMCI07slheQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD7kE0LespktHRD6bclBjniuWN4dw',
     video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/C4ZrK8EJTnE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
     alt : 'nomadsweden',
-    category : 'tour'
+    category : 'tour',
+    url : 'https://www.youtube.com/embed/C4ZrK8EJTnE'
   },
   {
     _id: uuid(),
@@ -30,7 +32,8 @@ export const videos = [
     creator:'Go4x4',
     title :'Camping in cold',
     alt : 'Go4x4',
-    category : 'camping'
+    category : 'camping',
+    url : 'https://www.youtube.com/embed/BEF2vPFo7aU'
   },
   {
     _id: uuid(),
@@ -39,7 +42,8 @@ export const videos = [
     creator : 'Mantavya',
     title : 'New ride',
     alt: 'Mantavya',
-    category : 'motorcycling'
+    category : 'motorcycling',
+    url : 'https://www.youtube.com/embed/MdCna5anHNo'
   },
   {
     _id: uuid(),
@@ -48,7 +52,8 @@ export const videos = [
     creator : 'MSK',
     title : 'The Day I Lost my Cool',
     alt:'MSK',
-    category : 'motorcycling'
+    category : 'motorcycling',
+    url : 'https://www.youtube.com/embed/IytKxMDflwQ'
   },
   {
     _id: uuid(),
@@ -57,7 +62,8 @@ export const videos = [
     creator: 'fakirariders',
     title : 'Ladakh 2022 with fakira',
     alt :'fakirariders',
-    category : 'camping'
+    category : 'camping',
+    url : 'https://www.youtube.com/embed/zHf9VwWEW48'
   },
   {
     _id: uuid(),
@@ -66,7 +72,8 @@ export const videos = [
     title : 'Zanskar Ride Main Hui Tabiyat Kharab',
     creator : 'riding with peace',
     alt : 'rwp',
-    category : 'tour'
+    category : 'tour',
+    url : 'https://www.youtube.com/embed/8FM0Qubms1o'
   },
   {
     _id: uuid(),
@@ -75,7 +82,8 @@ export const videos = [
     thumbnail : 'https://i.ytimg.com/vi/fPaj10lHep4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBfdxrMFta3ClgJzvtZQ5U-HfryLg',
     creator : 'ChrisIronhardt',
     alt:'ChrisIronhardt',
-    category : 'motorcycling'
+    category : 'motorcycling',
+    url : 'https://www.youtube.com/embed/2IUxCoqIf18'
   },
   {
     _id: uuid(),
@@ -84,6 +92,7 @@ export const videos = [
     video : '<iframe width="560" height="315" src="https://www.youtube.com/embed/Ku71sEKeZAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
     creator : 'Born Idiots',
     alt : 'bornidiots',
-    category : 'tour'
+    category : 'tour',
+    url : 'https://www.youtube.com/embed/Ku71sEKeZAw'
   } 
 ];

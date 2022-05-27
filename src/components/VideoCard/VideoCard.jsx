@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { usePlaylistContext } from "../../context";
 import "./VideoCard.css";
 
@@ -33,7 +34,9 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) =
         <>
             <div className='w-20 pd-2 card-border' key={id} id={id}>
                 <div>
-                    <img className="w-100 cursor-pointer" src={thumbnail} alt={alt} />
+                    <Link to={`/video/${id}`}>
+                        <img className="w-100 cursor-pointer" src={thumbnail} alt={alt} />
+                    </Link>                    
                 </div>
                 <div className="flex justify-spc-btwn align-center relative">
                     <span className="text-initial">{title}</span>

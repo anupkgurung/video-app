@@ -17,6 +17,9 @@ export const PlaylistVideo = () => {
             <div className="flex">
                 <Sidebar />
                 <div className="flex flex-col pd-5 w-100 relative">
+                    <div className="flex justify-center text-bold">
+                        <h4>No Videos</h4>
+                    </div>
                     {videoList.length > 0 ?
                         <main className="video-card-container video-list-main pd-btm">
                             {videoList.map(({ id, title, videoIframe, creator, thumbnail, alt }) => (
