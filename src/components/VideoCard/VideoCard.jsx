@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { usePlaylistContext } from "../../context";
+import { watchLater } from "../../Api";
 import "./VideoCard.css";
 
 export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) => {
@@ -12,6 +13,7 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) =
     const { initialState, playlistDispatch } = usePlaylistContext() || {};
     const { isPlaylistModalVisible } = initialState;
     const video = { id, title, videoIframe, thumbnail, creator, alt };
+
     const openModal = () => {
         setModalVisible(true)
     }
@@ -20,16 +22,6 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) =
         setModalVisible(false)
     }
 
-    const watchLater = async (id) => {
-        const encodedToken = localStorage.getItem("token");
-        try {
-            const data = await axios.post("/api/user/watchlater", { video }
-                , { headers: { authorization: encodedToken } }
-            )
-        } catch (error) {
-            console.log({ error })
-        }
-    }
     return (
         <>
             <div className='w-20 pd-2 card-border' key={id} id={id}>
@@ -45,7 +37,7 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) =
                         <div className="w-100 absolute margin-left-13 pd-top relative">
                             <div className="modal w-50" >
                                 <div className="modal-body flex flex-col pd-3">
-                                    <button className="no-border cursor-pointer flex align-center" onClick={() => watchLater(id)}>
+                                    <button className="no-border cursor-pointer flex align-center" onClick={() => watchLater(video)}>
                                         <span className="material-icons">{false ? "task_alt" : "watch_later"}</span>
                                         Watch Later
                                     </button>
