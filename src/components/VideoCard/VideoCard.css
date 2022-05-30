@@ -10,4 +10,6 @@
     box-shadow: 1px 2px 5px 0px grey;
     padding: 0.5rem;
 }
-
+.chip-item.is-active {
+    background-color : #dddbdb
+}

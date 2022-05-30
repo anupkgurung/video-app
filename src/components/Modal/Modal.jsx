@@ -2,7 +2,6 @@ import { usePlaylistContext } from "../../context";
 import { createNewPlaylist, addVideoToPlaylist } from "../../Api";
 import { Input } from "../../components"
 import { useToast } from "../../customHooks";
-import { useState } from "react";
 
 export const Modal = () => {
     const { initialState, playlistDispatch } = usePlaylistContext() || {};

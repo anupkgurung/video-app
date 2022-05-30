@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useEffect, useState } from "react";
 import { Sidebar, VideoCard } from "../../components"
 import { getAllLikedVideos } from "../../Api"

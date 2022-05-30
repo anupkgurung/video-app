@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
-import { Sidebar, VideoCard } from "../../components"
+import { Sidebar } from "../../components"
 import { usePlaylistContext } from "../../context";
 import { watchLater } from "../../Api";
 
