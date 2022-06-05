@@ -1,21 +1,14 @@
 import axios from "axios";
 import { useToast } from "../../customHooks";
-import { useState } from "react";
 import { usePlaylistContext } from "../../context";
 import { Link } from "react-router-dom";
+import { removePlaylist } from "../../Api";
 
 export const PlaylistCard = ({ id, title, src, alt, videoCount }) => {
-    //MODAL -> This needs to be moved(refactored)
-    const [modalVisible, setModalVisible] = useState(false);
-    const { showToast } = useToast();
 
-    const openModal = () => {
-        setModalVisible(true)
-    }
-
-    const closeModal = () => {
-        setModalVisible(false)
-    }
+    const playlist = { id, title, src, alt, videoCount }
+    const  { playlistDispatch } = usePlaylistContext();
+    const {showToast} = useToast();
 
     return (
         <>
@@ -29,7 +22,7 @@ export const PlaylistCard = ({ id, title, src, alt, videoCount }) => {
                 </div>
                 <div className="flex justify-spc-btwn align-center relative">
                     <span className="text-initial">{title}</span>
-                    <span onClick={openModal} className="material-icons">more_vert</span>
+                    <span className="material-icons-outlined cursor-pointer" onClick={()=>removePlaylist(showToast,playlist,playlistDispatch)}>delete_outline</span>
                 </div>
                 <div className="flex justify-spc-btwn">
                     <span>{videoCount} videos</span>

@@ -32,6 +32,10 @@ export const playlistReducer = (playlistState, { type, payload }) => {
         case "CLEAR_PLAYLIST_TITLE":
             return { ...playlistState, playlistTitle: '' }
         
+        case "DELETE_PLAYLIST":
+            return {...playlistState,playlist : playlistState.playlist
+                .filter(playlist => playlist.id === payload.id)}
+        
         default :
             return "no action type defined"
     }

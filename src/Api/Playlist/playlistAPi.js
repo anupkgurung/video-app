@@ -48,4 +48,21 @@ const getVideosFromPlaylist = async (showToast, playlistId, playlistDispatch) =>
         showToast("error", "error on getting videos from playlist");
     }
 }
-export { createNewPlaylist, addVideoToPlaylist, getVideosFromPlaylist }
+
+const removePlaylist = async (showToast,playlist,playlistDispatch) => {
+    const encodedToken = localStorage.getItem("token");
+    try{
+        const playlistId = playlist.id
+        const data = await axios.delete(`/api/user/playlists/${playlistId}`,
+            {headers: { authorization: encodedToken }} )
+
+        playlistDispatch({
+            type : "DELETE_PLAYLIST",
+            payload : playlist
+        })
+        showToast("success", "Playlist successfully removed");
+    }catch(error){
+        showToast("error", "error on removing videos from playlist");
+    }
+}
+export { createNewPlaylist, addVideoToPlaylist, getVideosFromPlaylist, removePlaylist }
