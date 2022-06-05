@@ -31,9 +31,12 @@ export const Input = ({
             
         case "password":
             return (
-                <input className="input-width w-100" autoComplete={hasAutoComplete ? "on" : "off"}
+                <div className="flex-col padding-top-4">
+                    <label className="margin-btm-2 mr-auto" htmlFor={id}>{title}</label>
+                    <input className="input-width w-100" autoComplete={hasAutoComplete ? "on" : "off"}
                     type={type} name={id} id={id} placeholder={placeholder}
                     required={isRequired} onChange={onChangeHandler} value={value} />
+                </div>               
             )
             break;
         case "custom-checbox" :
@@ -41,6 +44,11 @@ export const Input = ({
                 <>
                     <input type="checkbox" id={id} className="checkbox" onChange={onChangeHandler} />
                     <label className="pd-left" htmlFor={id}>{title}</label>
+                </>
+            )
+        default :
+            return (
+                <>                    
                 </>
             )
     }
