@@ -25,8 +25,9 @@ export const Signup = () => {
         e.preventDefault();
         try{
             const {data} = await axios.post("/api/auth/signup",userCredentials);
-            const { encodedToken } = data
+            const { encodedToken, createdUser } = data
             localStorage.setItem("token",encodedToken);
+            localStorage.setItem("createdUser",createdUser)
             encodedToken ? data.isLogin = true : data.isLogin = false;
             setUserData(data);
             navigateTo("/")

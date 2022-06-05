@@ -52,10 +52,10 @@ export const Login = () => {
                 />
 
                 <div>
-                    <div className="flex-row margin-btm-2 padding-top-4">
+                    {/* <div className="flex-row margin-btm-2 padding-top-4">
                         <label htmlFor="password">Password</label>
                         <Link className="link-style-none forgot-password" to="/">Forgot Password</Link>
-                    </div>
+                    </div> */}
                     <Input
                         id="password"
                         title="Password"

@@ -51,3 +51,19 @@ export const getVideoHandler = function (schema, request) {
     );
   }
 };
+
+export const getCategoryVideoHandler = function (schema, request) {
+  const { categoryName } = request.params;
+  try {
+    const video = categoryName === 'All' ? this.db.videos :  schema.videos.where({category : categoryName}).models
+    return new Response(200, {}, { video });
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};

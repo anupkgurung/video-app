@@ -10,6 +10,9 @@ const createNewPlaylist = async (showToast, playlistDispatch, playlistTitle) => 
             type: "UPDATE_PLAYLIST",
             payload: data.data.playlists
         });
+        playlistDispatch({
+            type: "CLEAR_PLAYLIST_TITLE",
+        })
     } catch ({ error }) {
         showToast("error", "error creating playlist");
     }

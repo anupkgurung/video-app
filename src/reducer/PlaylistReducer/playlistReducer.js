@@ -27,7 +27,12 @@ export const playlistReducer = (playlistState, { type, payload }) => {
             return {
                 ...playlistState, videoList: payload
             }
-        case "CLEAR_VIDEO_LIST" :
-            return {...playlistState,videoList:[]}
+        case "CLEAR_VIDEO_LIST":
+            return { ...playlistState, videoList: [] }
+        case "CLEAR_PLAYLIST_TITLE":
+            return { ...playlistState, playlistTitle: '' }
+        
+        default :
+            return "no action type defined"
     }
 }

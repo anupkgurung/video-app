@@ -1,12 +1,10 @@
-import axios from "axios";
 import { Sidebar, VideoCard, PlaylistCard } from "../../components"
-import { useToast, useDocumentTitle } from "../../customHooks";
+import { useDocumentTitle } from "../../customHooks";
 import { usePlaylistContext } from "../../context";
 import { useEffect } from "react";
 
 export const Playlist = () => {
     useDocumentTitle("Playlist");
-    const { showToast } = useToast();
     const { initialState, playlistDispatch } = usePlaylistContext() || {};
     const { isPlaylistModalVisible, playlist, videoList } = initialState;
 
@@ -16,14 +14,7 @@ export const Playlist = () => {
                 type: "CLEAR_VIDEO_LIST"
             })
         })()        
-    },[videoList])    
-
-    const setPlaylistTitle = (e) => {
-        playlistDispatch({
-            type: "SET_PLAYLIST_TITLE",
-            payload: e.target.value
-        })
-    }
+    },[videoList])
 
     return (
         <>
@@ -32,7 +23,7 @@ export const Playlist = () => {
                 <div className="flex flex-col pd-5 w-100 relative">
                     <div className="flex justify-spc-btwn text-bold">
                         <span></span>
-                        <h4>All Playlist</h4>
+                        <h4>All Playlist <span>({playlist.length})</span></h4>
                         <span title="Create Playlist"
                             onClick={() => playlistDispatch({
                                 type: "SET_PLAYLIST_MODAL_VISIBLE",
