@@ -41,63 +41,19 @@
     cursor: pointer;
 }
 /***** utils ******/
-.m-8 {
-    margin: 2rem;
-}
-.ml-0 {
-    margin-left: 0;
-}
-.ml-1 {
-    margin-left: calc(1*0.25rem);
-}
-.ml-8 {
-    margin-left: calc(8*0.25rem);
-}
+
 .font-lg {
     font-size: 1rem;
 }
 .hide-default {
     visibility: hidden;
 }
-.p-4 {
-    padding: 1rem;
-}
-.padding-5 {
-    padding: 1.5rem;
-}
 .w-100 {
     width: 100%;
-}
-.margin-btm-2 {
-    margin-bottom: .5rem;
-}
-.margin-top-2 {
-    margin-top: .5rem;
-}
-.padding-top-4 {
-    padding-top: 1rem;
-}
-.padding-top-2 {
-    padding-top: .5rem;
-}
-.padding-left {
-    padding-left: 2rem;
-}
-.pl-1 {
-    padding-left: 0.5rem;
 }
 .text-color {
     color: var(--royalblue-bg);
 }
 .relative {
     position: relative;
-}
-.flex {
-    display: flex;
-}
-.flex-col {
-    flex-direction: column;
-}
-.pl-2 {
-    padding-left : 2rem;
 }

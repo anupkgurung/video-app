@@ -1,0 +1,76 @@
+/**********************************LOGIN************************/
+
+.login-container , .signup-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.login-form , .signup-form {
+    width: 30rem;
+    margin: 2rem;
+    padding: 3rem 3rem;
+    border-radius: 5px;
+    box-shadow: 1px 2px 5px black;
+    max-width: 100%;
+}
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+.remember-credentials-check , .show-paswrd {
+    max-width: 35%;
+}
+.checkbox {
+    width: auto;
+}
+.login-btn {
+    margin :0;
+}
+.forgot-password:hover {
+    text-decoration: underline;
+    color: var(--paleblue);
+}
+.login-btn {
+    font-size: 1.2rem;
+}
+.mr-auto {
+    margin-right : auto
+}
+
+.input-width {
+    padding-left: 1.5rem;    
+}
+input:invalid:required, input:invalid {
+    border : 1px;
+    box-shadow: 0 0 1px 1px var(--primary-blue);
+}
+input:valid:required {
+    background-position: 0.4rem 0.8rem;
+}
+
+@media only screen and (max-width:700px){
+    .remember-credentials-check {
+        max-width: 55%;
+    }
+    .show-paswrd {
+        max-width: 55%;
+    }
+}
+
+@media only screen and (max-width:450px){
+    .remember-credentials-check {
+        max-width: 45%;
+    }
+    .show-paswrd {
+        max-width: 50%;
+    }
+}
+@media only screen and (max-width:400px){
+    .remember-credentials-check {
+        max-width: 50%;
+    }
+    .show-paswrd {
+        max-width: 60%;
+    }
+}
