@@ -23,7 +23,7 @@ export const playlistReducer = (playlistState, { type, payload }) => {
                     .map(playlist => playlist._id === payload._id ?
                         payload : playlist)
             }
-        case "VIDEO_LIST":
+        case "VIDEO_LIST": //adds video to a playlist
             return {
                 ...playlistState, videoList: payload
             }
@@ -34,8 +34,20 @@ export const playlistReducer = (playlistState, { type, payload }) => {
         
         case "DELETE_PLAYLIST":
             return {...playlistState,playlist : playlistState.playlist
-                .filter(playlist => playlist.id === payload.id)}
+                .filter(playlist => playlist._id !== payload.id)}
         
+        case "REMOVE_VIDEO_FROM_PLAYLIST":
+            return {
+                ...playlistState, playlist:  playlistState.playlist
+                    .map(playlist => playlist._id === payload.removeFromPlaylistId ? 
+                        {...playlist, videos : playlist.videos.filter(({id})=> id!==payload.id)}                
+                        : playlist)                    
+            }
+        
+        case "REMOVE_FROM_VIDEO_LIST" : //removes video from a playlist
+            return {
+                ...playlistState , videoList : playlistState.videoList.filter(({id})=> id !== payload.id)
+            }
         default :
             return "no action type defined"
     }

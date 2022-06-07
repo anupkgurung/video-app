@@ -21,6 +21,7 @@ const createNewPlaylist = async (showToast, playlistDispatch, playlistTitle) => 
 const addVideoToPlaylist = async (showToast, video, playlistId, playlistDispatch) => {
     const encodedToken = localStorage.getItem("token");
     try {
+        video.playlistIds.push(playlistId)
         const data = await axios.post(`/api/user/playlists/${playlistId}`,
             { video },
             { headers: { authorization: encodedToken } }
@@ -62,7 +63,40 @@ const removePlaylist = async (showToast,playlist,playlistDispatch) => {
         })
         showToast("success", "Playlist successfully removed");
     }catch(error){
+        showToast("error", "error on removing playlist");
+    }
+}
+
+const getAllPlaylist = () => {
+    const encodedToken = localStorage.getItem("token");
+    try {
+        const data = axios.get("/api/user/playlist",
+            {headers : {authorization : encodedToken}})
+        
+    } catch (error) {
+        
+    }
+}
+
+const removePlaylistVideo = async (showToast, video, playlistId, playlistDispatch) => {
+    const encodedToken = localStorage.getItem("token");
+    try {
+        const data = await axios.delete(`/api/user/playlists/${playlistId}/${video.id}`,
+            {headers : {authorization : encodedToken}})
+        
+            video.playlistIds = typeof video.playlistIds  === 'object' ? video.playlistIds.filter(id => id !== playlistId) : video.playlistIds
+            video['removeFromPlaylistId']=playlistId
+            playlistDispatch({
+                type : "REMOVE_VIDEO_FROM_PLAYLIST",
+                payload : video
+            })
+            playlistDispatch({
+                type : "REMOVE_FROM_VIDEO_LIST",
+                payload : video
+            })
+        showToast("success", "Video removed from playlist");
+    } catch (error) {
         showToast("error", "error on removing videos from playlist");
     }
 }
-export { createNewPlaylist, addVideoToPlaylist, getVideosFromPlaylist, removePlaylist }
+export { createNewPlaylist, addVideoToPlaylist, getVideosFromPlaylist, removePlaylist,removePlaylistVideo }
