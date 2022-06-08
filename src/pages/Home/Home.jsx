@@ -1,7 +1,7 @@
 import { Sidebar, VideoCard } from "../../components"
-import axios from "axios";
 import { useToast, useDocumentTitle } from "../../customHooks";
 import { useState, useEffect } from "react";
+import {getCategoryVideo, getAllVideos, getAllCategories } from "../../Api"
 import "../style.css";
 
 export const Home = () => {
@@ -11,40 +11,9 @@ export const Home = () => {
     const [categories, setCategories] = useState([]);
     const [currentCateogry, setCurrentCategory] = useState('All');
 
-    const getCategoryVideo = async (categoryName) => {
-        try {
-            const data = await axios.get(`/api/video/category/${categoryName}`)
-            setVideoList(data.data.video)
-            if(categoryName ==='All'){
-                setCurrentCategory("All")
-            }else{
-                setCurrentCategory(data.data.video[0].category)
-            }
-                
-        } catch (error) {
-            showToast("error", "Error occured on fetching videos"); 
-        }
-    }
-    const getAllVideos = async () => {
-        try {
-            const data = await axios.get("/api/videos")
-            setVideoList(data.data.videos)
-        } catch (error) {
-            showToast("error", "Error occured on fetching videos");
-        }
-    }
-    const getAllCategories = async ()=>{
-        try {
-            const data = await axios.get("/api/categories")
-            setCategories(data.data.categories)
-        } catch (error) {
-            showToast("error", "Error occured on fetching videos");
-        }
-    }
-
     useEffect(() => {
-        getAllVideos();
-        getAllCategories()
+        getAllVideos(setVideoList,showToast);
+        getAllCategories(setCategories,showToast)
     }, [])
 
     return (
@@ -56,7 +25,7 @@ export const Home = () => {
                         {
                             categories.length > 0 && categories.map(({_id,categoryName}) => (
                                 <span className={`chip-item ${categoryName === currentCateogry ? "is-active" : ''}` } key={_id}
-                                    onClick={(e)=>getCategoryVideo(categoryName)}>{categoryName}
+                                    onClick={(e)=>getCategoryVideo(categoryName,setCurrentCategory,showToast)}>{categoryName}
                                 </span>
                             ))
                         }
@@ -66,7 +35,7 @@ export const Home = () => {
                         {videoList && videoList.map(({ _id, title, video, creator, thumbnail, alt, playlistIds }) => (
                             <VideoCard
                                 key={_id}
-                                id={_id}
+                                _id={_id}
                                 title={title}
                                 videoIframe={video}
                                 thumbnail={thumbnail}

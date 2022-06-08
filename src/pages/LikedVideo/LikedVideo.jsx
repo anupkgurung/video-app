@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Sidebar, VideoCard } from "../../components"
 import { getAllLikedVideos } from "../../Api"
+import { useLikedVideoContext } from "../../context";
+import {useToast} from "../../customHooks"
+
 export const LikedVideo = () => {
 
-    const [likedVideos, setLikedVideos] = useState([]);
-    
+    const {likedVideos, setLikedVideos} = useLikedVideoContext();
+   const {showToast} = useToast()
     useEffect(() => {
-        getAllLikedVideos(setLikedVideos)
+        getAllLikedVideos(setLikedVideos,showToast)
     }, [setLikedVideos])
 
     return (
@@ -16,15 +19,16 @@ export const LikedVideo = () => {
                 <div className={`flex pd-5 ${likedVideos.length === 0 ? 'w-100':'' }`}>
                 {likedVideos.length > 0 ?
                     <main className="video-card-container video-list-main pd-btm">
-                         {likedVideos.map(({ _id, title, video, creator, thumbnail, alt }) => (
+                         {likedVideos.map(({ _id, title, videoIframe, creator, thumbnail, alt,playlistIds }) => (
                             <VideoCard
                                 key={_id}
-                                id={_id}
+                                _id={_id}
                                 title={title}
-                                videoIframe={video}
+                                videoIframe={videoIframe}
                                 thumbnail={thumbnail}
                                 creator={creator}
                                 alt={alt}
+                                playlistIds={playlistIds}
                             />
                         ))}
                     </main>

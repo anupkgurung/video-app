@@ -26,16 +26,16 @@ export const PlaylistVideo = () => {
                     </div>
                     {videoList.length > 0 ?
                         <main className="video-card-container video-list-main pd-btm">
-                            {videoList.map(({ id, title, videoIframe, creator, thumbnail, alt }) => (
+                            {videoList.map(({ _id, title, videoIframe, creator, thumbnail, alt,playlistIds }) => (
                                 <VideoCard
-                                    key={id}
-                                    id={id}
+                                    key={_id}
+                                    _id={_id}
                                     title={title}
                                     videoIframe={videoIframe}
                                     thumbnail={thumbnail}
                                     creator={creator}
                                     alt={alt}
-                                    playlistIds={playlistId}
+                                    playlistIds={playlistIds}
                                 />
                             ))}
                         </main> :
