@@ -13,7 +13,8 @@ export const videos = [
     alt :"onherbike",
     creator: "onherbike",
     category : 'Motorcycling',
-    url : 'https://www.youtube.com/embed/lAdvYM_Wtek'
+    url : 'https://www.youtube.com/embed/lAdvYM_Wtek',
+    playlistIds : []
   },
   {
     _id: "F_Riqjdh2oM",
@@ -23,7 +24,8 @@ export const videos = [
     video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/C4ZrK8EJTnE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
     alt : 'nomadsweden',
     category : 'Tour',
-    url : 'https://www.youtube.com/embed/C4ZrK8EJTnE'
+    url : 'https://www.youtube.com/embed/C4ZrK8EJTnE',
+    playlistIds : []
   },
   {
     _id: uuid(),
@@ -33,7 +35,8 @@ export const videos = [
     title :'Camping in cold',
     alt : 'Go4x4',
     category : 'Camping',
-    url : 'https://www.youtube.com/embed/BEF2vPFo7aU'
+    url : 'https://www.youtube.com/embed/BEF2vPFo7aU',
+    playlistIds : []
   },
   {
     _id: uuid(),
@@ -43,7 +46,8 @@ export const videos = [
     title : 'New ride',
     alt: 'Mantavya',
     category : 'Motorcycling',
-    url : 'https://www.youtube.com/embed/MdCna5anHNo'
+    url : 'https://www.youtube.com/embed/MdCna5anHNo',
+    playlistIds : []
   },
   {
     _id: uuid(),
@@ -53,7 +57,8 @@ export const videos = [
     title : 'The Day I Lost my Cool',
     alt:'MSK',
     category : 'Motorcycling',
-    url : 'https://www.youtube.com/embed/IytKxMDflwQ'
+    url : 'https://www.youtube.com/embed/IytKxMDflwQ',
+    playlistIds : []
   },
   {
     _id: uuid(),
@@ -63,7 +68,8 @@ export const videos = [
     title : 'Ladakh 2022 with fakira',
     alt :'fakirariders',
     category : 'Camping',
-    url : 'https://www.youtube.com/embed/zHf9VwWEW48'
+    url : 'https://www.youtube.com/embed/zHf9VwWEW48',
+    playlistIds : []
   },
   {
     _id: uuid(),
@@ -73,7 +79,8 @@ export const videos = [
     creator : 'riding with peace',
     alt : 'rwp',
     category : 'Riding',
-    url : 'https://www.youtube.com/embed/8FM0Qubms1o'
+    url : 'https://www.youtube.com/embed/8FM0Qubms1o',
+    playlistIds : []
   },
   {
     _id: uuid(),
@@ -83,7 +90,8 @@ export const videos = [
     creator : 'ChrisIronhardt',
     alt:'ChrisIronhardt',
     category : 'Motorcycling',
-    url : 'https://www.youtube.com/embed/2IUxCoqIf18'
+    url : 'https://www.youtube.com/embed/2IUxCoqIf18',
+    playlistIds : []
   },
   {
     _id: uuid(),
@@ -93,6 +101,7 @@ export const videos = [
     creator : 'Born Idiots',
     alt : 'bornidiots',
     category : 'Tour',
-    url : 'https://www.youtube.com/embed/Ku71sEKeZAw'
+    url : 'https://www.youtube.com/embed/Ku71sEKeZAw',
+    playlistIds : []
   } 
 ];

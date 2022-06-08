@@ -52,7 +52,7 @@ export const Playlist = () => {
                     }
                     {videoList.length > 0 ? 
                         <main className="video-card-container video-list-main pd-btm">
-                            {videoList.map(({id,title,videoIframe,creator,thumbnail,alt}) => (
+                            {videoList.map(({id,title,videoIframe,creator,thumbnail,alt,playlistIds}) => (
                                 <VideoCard
                                     key ={id}
                                     id={id}

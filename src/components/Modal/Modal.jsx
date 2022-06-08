@@ -1,5 +1,5 @@
 import { usePlaylistContext } from "../../context";
-import { createNewPlaylist, addVideoToPlaylist } from "../../Api";
+import { createNewPlaylist, addVideoToPlaylist, removePlaylistVideo } from "../../Api";
 import { Input } from "../../components"
 import { useToast } from "../../customHooks";
 
@@ -26,11 +26,15 @@ export const Modal = () => {
                         </div>
                         <div className="flex flex-col pd-3">
                             <ul className="flex-col pl-2">
-                                {playlist && playlist.map(({ title, _id }) => (
+                                {playlist && playlist.map(({ title, _id, videos },idx) => (
                                     <li className="flex align-center" key={_id}>
                                         <Input id={_id} type={"custom-checbox"}
+                                            isChecked={ videos.filter((obj,idx)=>obj.id === playlistVideo.id).some((el)=> el.id  === playlistVideo.id)}                                
                                             title={title}
-                                            onChangeHandler={(e) => addVideoToPlaylist(showToast, playlistVideo, e.target.id, playlistDispatch)}
+                                            onChangeHandler={
+                                                (e) => e.target.checked ? addVideoToPlaylist(showToast, playlistVideo, e.target.id, playlistDispatch)
+                                                        : removePlaylistVideo(showToast, playlistVideo, e.target.id, playlistDispatch)
+                                            }
                                         />
                                     </li>
                                 ))}

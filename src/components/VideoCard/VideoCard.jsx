@@ -2,16 +2,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { usePlaylistContext } from "../../context";
-import { watchLater } from "../../Api";
+import { watchLater, addToLikedVideo } from "../../Api";
 import "./VideoCard.css";
+import { useEffect } from "react";
 
-export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) => {
+export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt, playlistIds }) => {
 
     //MODAL -> This needs to be moved(refactored)
     const [modalVisible, setModalVisible] = useState(false);
     const { initialState, playlistDispatch } = usePlaylistContext() || {};
-    const { isPlaylistModalVisible } = initialState;
-    const video = { id, title, videoIframe, thumbnail, creator, alt };
+    const { isPlaylistModalVisible, playlist } = initialState;
+    const video = { id, title, videoIframe, thumbnail, creator, alt, playlistIds };
+    const playlistVideo = playlist.map(({ videos }) => videos.filter((vObj) => vObj.id === video.id)).filter(obj => obj.length > 0)
+    const inPlaylist = playlistVideo.length > 0
 
     const openModal = () => {
         setModalVisible(true)
@@ -21,13 +24,25 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) =
         setModalVisible(false)
     }
 
+    const playlistDispatcher = (id) => {
+        playlistDispatch({
+            type: "SET_PLAYLIST_MODAL_VISIBLE",
+            payload: isPlaylistModalVisible
+        })
+        playlistDispatch({
+            type: "SET_PLAYLIST_VIDEO",
+            payload: video
+        })
+        closeModal()
+    }
+
     return (
         <>
             <div className='w-20 pd-2 card-border' key={id} id={id}>
                 <div>
                     <Link to={`/video/${id}`}>
                         <img className="w-100 cursor-pointer" src={thumbnail} alt={alt} />
-                    </Link>                    
+                    </Link>
                 </div>
                 <div className="flex justify-spc-btwn align-center relative">
                     <span className="text-initial">{title}</span>
@@ -36,29 +51,21 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt }) =
                         <div className="w-100 absolute margin-left-13 pd-top relative">
                             <div className="modal w-50" >
                                 <div className="modal-body flex flex-col pd-3">
-                                    <button className="no-border cursor-pointer flex align-center" onClick={() => watchLater(video)}>
-                                        <span className="material-icons">{false ? "task_alt" : "watch_later"}</span>
+                                    <button className="no-border cursor-pointer flex align-center" onClick={() => { watchLater(video); closeModal() }}>
+                                        <span className="material-icons-outlined">{false ? "task_alt" : "watch_later"}</span>
                                         Watch Later
                                     </button>
                                     <button className="no-border absolute ml-7" onClick={closeModal}>
                                         <span className="material-icons">close</span>
                                     </button>
                                     <button className="no-border cursor-pointer flex align-center"
-                                        onClick={
-                                            () => {
-                                                playlistDispatch({
-                                                    type: "SET_PLAYLIST_MODAL_VISIBLE",
-                                                    payload: isPlaylistModalVisible
-                                                })
-                                                playlistDispatch({
-                                                    type: "SET_PLAYLIST_VIDEO",
-                                                    payload: video
-                                                })
-                                            }
-                                        }
+                                        onClick={() => playlistDispatcher(id)}
                                     >
-                                        <span className="material-icons">playlist_add</span>
-                                        Add to Playlist
+                                        <span className="material-icons-outlined">{!inPlaylist ? 'playlist_add' : 'playlist_remove'}</span>
+                                        {!inPlaylist ? 'Add to Playlist' : 'Remove'}
+                                    </button>
+                                    <button className="no-border cursor-pointer flex align-center mr-2" onClick={() => addToLikedVideo(video)}>
+                                        <span className={false ? "material-icons" : "material-icons-outlined"}>thumb_up</span>Like
                                     </button>
                                 </div>
                             </div>

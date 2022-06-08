@@ -63,7 +63,7 @@ export const Home = () => {
                     </div>
 
                     <main className="video-card-container video-list-main pd-btm">
-                        {videoList && videoList.map(({ _id, title, video, creator, thumbnail, alt }) => (
+                        {videoList && videoList.map(({ _id, title, video, creator, thumbnail, alt, playlistIds }) => (
                             <VideoCard
                                 key={_id}
                                 id={_id}
@@ -72,6 +72,7 @@ export const Home = () => {
                                 thumbnail={thumbnail}
                                 creator={creator}
                                 alt={alt}
+                                playlistIds={playlistIds}
                             />
                         ))}
 

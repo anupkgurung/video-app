@@ -3,6 +3,7 @@ import { Sidebar, VideoCard } from "../../components"
 import { usePlaylistContext } from "../../context";
 import { getVideosFromPlaylist } from "../../Api";
 import { useToast } from "../../customHooks";
+import { useEffect } from "react";
 
 export const PlaylistVideo = () => {
 
@@ -10,7 +11,10 @@ export const PlaylistVideo = () => {
     const { initialState, playlistDispatch } = usePlaylistContext() || {};
     const { videoList } = initialState;
     const { showToast } = useToast();
-    getVideosFromPlaylist(showToast, playlistId, playlistDispatch)
+    
+    useEffect(()=>{
+        getVideosFromPlaylist(showToast, playlistId, playlistDispatch)
+    },[])
 
     return (
         <>
@@ -31,6 +35,7 @@ export const PlaylistVideo = () => {
                                     thumbnail={thumbnail}
                                     creator={creator}
                                     alt={alt}
+                                    playlistIds={playlistId}
                                 />
                             ))}
                         </main> :
