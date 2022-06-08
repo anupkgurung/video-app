@@ -30,6 +30,7 @@ const addVideoToPlaylist = async (showToast, video, playlistId, playlistDispatch
             type: "ADD_VIDEO_TO_PLAYLIST",
             payload: data.data.playlist
         });
+        showToast("success", "Succesfully added video to playlist")
     } catch (error) {
         showToast("error", "error on adding video to playlist");
     }

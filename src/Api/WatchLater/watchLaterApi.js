@@ -1,23 +1,38 @@
 import axios from "axios";
 
-export const watchLater = async (video) => {
+export const getWatchLaterList = async (setWatchLater,showToast) => {
     const encodedToken = localStorage.getItem("token");
     try {
-        await axios.post("/api/user/watchlater", { video }
-            , { headers: { authorization: encodedToken } }
-        )
-    } catch (error) {
-        console.log({ error })
+        const data = await axios.get("/api/user/watchlater",
+            { headers: { authorization: encodedToken } });
+        setWatchLater(data.data.watchlater)
+    } catch ({ error }) {
+        showToast("error", "Error occured on fetching watch later");
     }
 }
 
-export const removeFromWatchLater = async (videoId) => {
+export const addToWatchLater = async (video,setWatchLater,showToast) => {
     const encodedToken = localStorage.getItem("token");
     try {
-        await axios.post(`/api/user/watchlater/${videoId}`
+        const data = await axios.post("/api/user/watchlater", { video }
             , { headers: { authorization: encodedToken } }
         )
+        setWatchLater(data.data.watchlater)
+        showToast("success","Added to watch later")
     } catch (error) {
-        console.log({ error })
+        showToast("error", "Error occured on adding to watch later");
+    }
+}
+
+export const removeFromWatchLater = async (videoId,setWatchLater,showToast) => {
+    const encodedToken = localStorage.getItem("token");
+    try {
+        const data = await axios.delete(`/api/user/watchlater/${videoId}`
+            , { headers: { authorization: encodedToken } }
+        )
+         setWatchLater(data.data.watchlater)
+         showToast("success", "Video removed successfully");
+    } catch (error) {
+        showToast("error", "Error occured on removing video");
     }
 }

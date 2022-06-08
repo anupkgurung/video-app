@@ -1,20 +1,24 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { usePlaylistContext } from "../../context";
-import { watchLater, addToLikedVideo } from "../../Api";
+import { useLikedVideoContext, usePlaylistContext, useWatchLaterContext } from "../../context";
+import { addToWatchLater, addToLikedVideo, removeFromWatchLater, removeFromLikedVideo } from "../../Api";
 import "./VideoCard.css";
-import { useEffect } from "react";
+import { useToast } from "../../customHooks";
 
-export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt, playlistIds }) => {
+export const VideoCard = ({ _id, title, videoIframe, thumbnail, creator, alt, playlistIds }) => {
 
-    //MODAL -> This needs to be moved(refactored)
     const [modalVisible, setModalVisible] = useState(false);
+    const {showToast} = useToast()
     const { initialState, playlistDispatch } = usePlaylistContext() || {};
     const { isPlaylistModalVisible, playlist } = initialState;
-    const video = { id, title, videoIframe, thumbnail, creator, alt, playlistIds };
-    const playlistVideo = playlist.map(({ videos }) => videos.filter((vObj) => vObj.id === video.id)).filter(obj => obj.length > 0)
-    const inPlaylist = playlistVideo.length > 0
+    const video = { _id, title, videoIframe, thumbnail, creator, alt, playlistIds };
+    const playlistVideo = playlist.map(({ videos }) => videos.filter((vObj) => vObj._id === _id)).filter(obj => obj.length > 0)
+    const inPlaylist = playlistVideo.length > 0;
+    const {watchLater, setWatchLater} = useWatchLaterContext()||{};
+    const {likedVideos, setLikedVideos} = useLikedVideoContext()||{};
+    const hasWatchLater = watchLater.some((watchLaterVideoObj)=> watchLaterVideoObj._id === _id)
+    const isLikedVideo = likedVideos.some(likedVideoObj=> likedVideoObj._id === _id)
 
     const openModal = () => {
         setModalVisible(true)
@@ -36,11 +40,20 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt, pla
         closeModal()
     }
 
+    const watchLaterHandler = (hasWatchLater,video)=>{
+        hasWatchLater ? removeFromWatchLater(video._id,setWatchLater,showToast) : addToWatchLater(video,setWatchLater,showToast)
+        closeModal()
+    }
+    const likedVideoHandler = (isLikedVideo,video) => {
+        isLikedVideo ? removeFromLikedVideo(video._id,setLikedVideos,showToast) : addToLikedVideo(video,setLikedVideos,showToast)
+        closeModal()
+    }
+
     return (
         <>
-            <div className='w-20 pd-2 card-border' key={id} id={id}>
+            <div className='w-20 pd-2 card-border' key={_id} id={_id}>
                 <div>
-                    <Link to={`/video/${id}`}>
+                    <Link to={`/video/${_id}`}>
                         <img className="w-100 cursor-pointer" src={thumbnail} alt={alt} />
                     </Link>
                 </div>
@@ -51,21 +64,23 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt, pla
                         <div className="w-100 absolute margin-left-13 pd-top relative">
                             <div className="modal w-50" >
                                 <div className="modal-body flex flex-col pd-3">
-                                    <button className="no-border cursor-pointer flex align-center" onClick={() => { watchLater(video); closeModal() }}>
-                                        <span className="material-icons-outlined">{false ? "task_alt" : "watch_later"}</span>
+                                    <button className="no-border cursor-pointer flex align-center" 
+                                        onClick={() => watchLaterHandler(hasWatchLater,video)}
+                                    >
+                                        <span className="material-icons-outlined">{hasWatchLater ? "task_alt" : "watch_later"}</span>
                                         Watch Later
                                     </button>
                                     <button className="no-border absolute ml-7" onClick={closeModal}>
                                         <span className="material-icons">close</span>
                                     </button>
                                     <button className="no-border cursor-pointer flex align-center"
-                                        onClick={() => playlistDispatcher(id)}
+                                        onClick={() => playlistDispatcher(_id)}
                                     >
                                         <span className="material-icons-outlined">{!inPlaylist ? 'playlist_add' : 'playlist_remove'}</span>
-                                        {!inPlaylist ? 'Add to Playlist' : 'Remove'}
+                                        Add to Playlist
                                     </button>
-                                    <button className="no-border cursor-pointer flex align-center mr-2" onClick={() => addToLikedVideo(video)}>
-                                        <span className={false ? "material-icons" : "material-icons-outlined"}>thumb_up</span>Like
+                                    <button className="no-border cursor-pointer flex align-center mr-2" onClick={() => likedVideoHandler(isLikedVideo,video)}>
+                                        <span className={isLikedVideo ? "material-icons" : "material-icons-outlined"}>thumb_up</span>Like
                                     </button>
                                 </div>
                             </div>

@@ -3,7 +3,7 @@ import { createContext, useState, useContext } from "react";
 const WatchLaterContext = createContext();
 
 const WatchLaterProvider = ({children}) => {
-    const [watchLater, setWatchLater] = useState();
+    const [watchLater, setWatchLater] = useState([]);
 
     return (
         <WatchLaterContext.Provider value={{watchLater, setWatchLater}}>

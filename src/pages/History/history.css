@@ -1,0 +1,10 @@
+.history-close{
+    border-radius: 50%;
+    border: 1px solid #00000030;
+    background-color: aliceblue;
+    font-size: 1.2rem;
+}
+
+.history-close:hover {
+    border-color: #0000009e;
+}

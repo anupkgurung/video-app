@@ -1,13 +1,14 @@
 import "./App.css";
 import { Routes , Route} from "react-router-dom";
 import { Home, Signup, Login, WatchLater, Playlist, PlaylistVideo, SingleVideo, History, LikedVideo } from "./pages";
-import { Navbar, Modal } from "./components";
+import { Navbar, Modal, Toast } from "./components";
 
 function App() {
   return (
     <div className="App">
     <Modal />
     <Navbar /> 
+    <Toast />    
      <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

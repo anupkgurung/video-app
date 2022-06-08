@@ -1,27 +1,17 @@
-import axios from "axios"
 import { useToast, useDocumentTitle } from "../../customHooks";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Sidebar, VideoCard } from "../../components"
+import { getWatchLaterList } from "../../Api"
+import { useWatchLaterContext } from "../../context";
 
 
 export const WatchLater = () => {
     useDocumentTitle("Watch Later");
     const { showToast } = useToast();
-    const [watchLater, setWatchLater] = useState([])
-
-    const getWatchLaterList = async () => {
-        const encodedToken = localStorage.getItem("token");
-        try {
-            const data = await axios.get("/api/user/watchlater",
-                { headers: { authorization: encodedToken } });
-            setWatchLater(data.data.watchlater)
-        } catch ({ error }) {
-            showToast("error", "Error occured on fetching watch later");
-        }
-    }
+    const {watchLater, setWatchLater} = useWatchLaterContext()
 
     useEffect(() => {
-        getWatchLaterList();
+        getWatchLaterList(setWatchLater,showToast);
     }, [])
 
     return (
@@ -31,15 +21,16 @@ export const WatchLater = () => {
                 <div className={`flex pd-5 ${watchLater.length === 0 ? 'w-100':'' }`}>
                     {watchLater.length > 0 ?
                         <main className="video-card-container video-list-main pd-btm">
-                            {watchLater.map(({ _id, title, video, creator, thumbnail, alt }) => (
+                            {watchLater.map(({ _id, title, videoIframe, creator, thumbnail, alt, playlistIds}) => (
                                 <VideoCard
                                     key={_id}
-                                    id={_id}
+                                    _id={_id}
                                     title={title}
-                                    videoIframe={video}
+                                    videoIframe={videoIframe}
                                     thumbnail={thumbnail}
                                     creator={creator}
                                     alt={alt}
+                                    playlistIds={playlistIds}
                                 />
                             ))}
                         </main>
