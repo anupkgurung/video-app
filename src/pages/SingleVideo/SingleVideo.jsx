@@ -1,46 +1,32 @@
-import axios from "axios";
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { Sidebar } from "../../components"
-import { usePlaylistContext } from "../../context";
-import { watchLater, addToLikedVideo } from "../../Api";
+import { useLikedVideoContext, usePlaylistContext, useWatchLaterContext } from "../../context";
+import { addToWatchLater, addToLikedVideo, addVideoToHistory,getVideo, removeFromLikedVideo, removeFromWatchLater } from "../../Api";
+import { useToast } from "../../customHooks";
 
 export const SingleVideo = () => {
     const { id: videoId } = useParams();
     const [video, setVideo] = useState({})
     const encodedToken = localStorage.getItem('token');
     const { initialState, playlistDispatch } = usePlaylistContext() || {};
-    const { isPlaylistModalVisible } = initialState;
-    const [isLiked, setIsLiked] = useState(false);
-
-    const getVideo = async () => {
-        try {
-            const data = await axios.get(`/api/video/${videoId}`)
-            console.log(data)
-            setVideo(data.data.video)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    
-    const addVideoToHistory = async () => {
-        try {
-            await axios.post("/api/user/history", { video },
-                { headers: { authorization: encodedToken } })
-        } catch (error) {
-            //error.response.data.errors add this to toast
-            console.log(error)
-        }
-    }
+    const { isPlaylistModalVisible,playlist } = initialState;
+    const {showToast} = useToast();
+    const {watchLater, setWatchLater} = useWatchLaterContext()||{};
+    const {likedVideos, setLikedVideos} = useLikedVideoContext()||{};
+    const hasWatchLater = watchLater.some((watchLaterVideoObj)=> watchLaterVideoObj._id === videoId)
+    const isLikedVideo = likedVideos.some(likedVideoObj=> likedVideoObj._id === videoId)
+    //const video = { id, title, videoIframe, thumbnail, creator, alt, playlistIds };
+    const playlistVideo = playlist.map(({ videos }) => videos.filter((vObj) => vObj._id === videoId)).filter(obj => obj.length > 0)
+    const inPlaylist = playlistVideo.length > 0;
 
     useEffect(() => {
         if(Object.keys(video).length === 0){
-            getVideo()
+            getVideo(videoId,setVideo,showToast)
         }else{
-            addVideoToHistory()
+            addVideoToHistory(video,encodedToken)
         }
     }, [video])
-
 
     return (
         <>
@@ -62,12 +48,13 @@ export const SingleVideo = () => {
                         <div className="flex justify-spc-btwn pd-top">
                             <div className="text-bold">{video.creator}</div>
                             <div className="flex">
-                                <button className="no-border cursor-pointer flex align-center mr-2" onClick={()=>addToLikedVideo(video)}>
-                                    <span className={isLiked ? "material-icons" : "material-icons-outlined"}>thumb_up</span>LIKE
+                                <button className="no-border cursor-pointer flex align-center mr-2" 
+                                    onClick={()=>isLikedVideo ? removeFromLikedVideo(videoId,setLikedVideos,showToast) : addToLikedVideo(video,setLikedVideos,showToast) }>
+                                    <span className={isLikedVideo ? "material-icons" : "material-icons-outlined"}>thumb_up</span>LIKE
                                 </button>
-                                <button className="no-border cursor-pointer flex align-center mr-2">
+                                {/* <button className="no-border cursor-pointer flex align-center mr-2">
                                     <span className="material-icons-outlined">thumb_down</span>DISLIKE
-                                </button>
+                                </button> */}
                                 <button className="no-border cursor-pointer flex align-center mr-2"
                                         onClick={
                                             () => {
@@ -81,10 +68,11 @@ export const SingleVideo = () => {
                                                 })
                                             }
                                         }>
-                                    <span className="material-icons">{true ? 'playlist_add' : 'playlist_add_check'}</span>ADD TO PLAYLIST
+                                    <span className="material-icons">{inPlaylist ? 'playlist_add_check' : 'playlist_add'}</span>ADD TO PLAYLIST
                                 </button>
-                                <button className="no-border cursor-pointer flex align-center mr-2" onClick={() => watchLater(video)}>
-                                    <span className="material-icons-outlined">{true ? 'watch_later' : 'task_alt'}</span>WATCH LATER
+                                <button className="no-border cursor-pointer flex align-center mr-2" 
+                                    onClick={() => hasWatchLater ? removeFromWatchLater(videoId,setWatchLater,showToast) : addToWatchLater(video,setWatchLater,showToast)}>
+                                    <span className="material-icons-outlined">{hasWatchLater ? 'task_alt' : 'watch_later'}</span>WATCH LATER
                                 </button>
                             </div>
                         </div>
