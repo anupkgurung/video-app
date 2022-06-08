@@ -11,3 +11,12 @@ export const getAllLikedVideos = async (setLikedVideos) => {
         console.log(error)
     }
 }
+export const addToLikedVideo =  async(video) => {
+    const encodedToken = localStorage.getItem("token");
+    try {
+        await axios.post("/api/user/likes",{video},
+        { headers: { authorization: encodedToken } })
+    } catch (error) {
+        console.log(error)
+    }
+}

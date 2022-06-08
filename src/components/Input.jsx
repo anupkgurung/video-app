@@ -3,7 +3,7 @@ import React from "react";
 
 export const Input = ({ 
     id, title, type, onChangeHandler=()=>{}, value="", placeholder="", 
-    hasAutoComplete=false,isRequired=false
+    hasAutoComplete=false,isRequired=false,isChecked=false
     }) => {
 
     switch (type) {
@@ -42,7 +42,7 @@ export const Input = ({
         case "custom-checbox" :
             return (
                 <>
-                    <input type="checkbox" id={id} className="checkbox" onChange={onChangeHandler} />
+                    <input type="checkbox" id={id} className="checkbox" checked={isChecked} onChange={onChangeHandler} />
                     <label className="pd-left" htmlFor={id}>{title}</label>
                 </>
             )

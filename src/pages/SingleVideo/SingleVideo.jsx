@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { Sidebar } from "../../components"
 import { usePlaylistContext } from "../../context";
-import { watchLater } from "../../Api";
+import { watchLater, addToLikedVideo } from "../../Api";
 
 export const SingleVideo = () => {
     const { id: videoId } = useParams();
@@ -29,16 +29,6 @@ export const SingleVideo = () => {
                 { headers: { authorization: encodedToken } })
         } catch (error) {
             //error.response.data.errors add this to toast
-            console.log(error)
-        }
-    }
-
-    
-    const addToLikedVideo =  async() => {
-        try {
-            await axios.post("/api/user/likes",{video},
-            { headers: { authorization: encodedToken } })
-        } catch (error) {
             console.log(error)
         }
     }
@@ -72,7 +62,7 @@ export const SingleVideo = () => {
                         <div className="flex justify-spc-btwn pd-top">
                             <div className="text-bold">{video.creator}</div>
                             <div className="flex">
-                                <button className="no-border cursor-pointer flex align-center mr-2" onClick={()=>addToLikedVideo(video._id)}>
+                                <button className="no-border cursor-pointer flex align-center mr-2" onClick={()=>addToLikedVideo(video)}>
                                     <span className={isLiked ? "material-icons" : "material-icons-outlined"}>thumb_up</span>LIKE
                                 </button>
                                 <button className="no-border cursor-pointer flex align-center mr-2">
