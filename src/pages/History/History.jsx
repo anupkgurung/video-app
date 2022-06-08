@@ -1,25 +1,16 @@
 import { useDocumentTitle } from "../../customHooks";
 import { Sidebar, VideoCard } from "../../components"
-import axios from "axios";
 import { useState, useEffect } from "react";
+import  { getAllVideoFromHistory, removeFromHistory } from "../../Api"
+import "./history.css"
 
 export const History = () => {
     useDocumentTitle("History");
     const [historyVideos, setHistoryVideos] = useState([])
     const encodedToken = localStorage.getItem("token")
 
-    const getAllVideoFromHistory = async () => {
-        try {
-            const data = await axios.get("/api/user/history", {
-                headers: { authorization: encodedToken }
-            })
-            setHistoryVideos(data.data.history)
-        } catch (error) {
-            console.log(error)
-        }
-    }
     useEffect(() => {
-        getAllVideoFromHistory()
+        getAllVideoFromHistory(setHistoryVideos,encodedToken)
     }, [])
 
     return (
@@ -30,6 +21,10 @@ export const History = () => {
                     {historyVideos.length > 0 ?
                         <main className="video-card-container video-list-main pd-btm">
                             {historyVideos.map(({ _id, title, video, creator, thumbnail, alt }) => (
+                                <div key={_id}>
+                                    <button className="no-border absolute ml-9 mt-06" onClick={()=>removeFromHistory(setHistoryVideos,encodedToken,_id)}>
+                                        <span className="material-icons history-close">close</span>
+                                    </button>
                                 <VideoCard
                                     key={_id}
                                     id={_id}
@@ -39,6 +34,7 @@ export const History = () => {
                                     creator={creator}
                                     alt={alt}
                                 />
+                                </div>
                             ))}
                         </main>
                         :

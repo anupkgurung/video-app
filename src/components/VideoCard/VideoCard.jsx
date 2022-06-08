@@ -1,10 +1,9 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { usePlaylistContext } from "../../context";
-import { watchLater, addToLikedVideo } from "../../Api";
+import { useLikedVideoContext, usePlaylistContext, useWatchLaterContext } from "../../context";
+import { addToWatchLater, addToLikedVideo, removeFromWatchLater, removeFromLikedVideo } from "../../Api";
 import "./VideoCard.css";
-import { useEffect } from "react";
 
 export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt, playlistIds }) => {
 
@@ -14,7 +13,11 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt, pla
     const { isPlaylistModalVisible, playlist } = initialState;
     const video = { id, title, videoIframe, thumbnail, creator, alt, playlistIds };
     const playlistVideo = playlist.map(({ videos }) => videos.filter((vObj) => vObj.id === video.id)).filter(obj => obj.length > 0)
-    const inPlaylist = playlistVideo.length > 0
+    const inPlaylist = playlistVideo.length > 0;
+    const {watchLater, setWatchLater} = useWatchLaterContext()||{};
+    const {likedVideos, setLikedVideos} = useLikedVideoContext()||{};
+    const hasWatchLater = watchLater.some((watchLaterVideoObj)=> watchLaterVideoObj.id === id)
+    const isLikedVideo = likedVideos.some(likedVideoObj=> likedVideoObj.id === id)
 
     const openModal = () => {
         setModalVisible(true)
@@ -36,6 +39,15 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt, pla
         closeModal()
     }
 
+    const watchLaterHandler = (hasWatchLater,video)=>{
+        hasWatchLater ? removeFromWatchLater(video.id,setWatchLater) : addToWatchLater(video,setWatchLater)
+        closeModal()
+    }
+    const likedVideoHandler = (isLikedVideo,video) => {
+        isLikedVideo ? removeFromLikedVideo(video.id,setLikedVideos) : addToLikedVideo(video,setLikedVideos)
+        closeModal()
+    }
+
     return (
         <>
             <div className='w-20 pd-2 card-border' key={id} id={id}>
@@ -51,8 +63,10 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt, pla
                         <div className="w-100 absolute margin-left-13 pd-top relative">
                             <div className="modal w-50" >
                                 <div className="modal-body flex flex-col pd-3">
-                                    <button className="no-border cursor-pointer flex align-center" onClick={() => { watchLater(video); closeModal() }}>
-                                        <span className="material-icons-outlined">{false ? "task_alt" : "watch_later"}</span>
+                                    <button className="no-border cursor-pointer flex align-center" 
+                                        onClick={() => watchLaterHandler(hasWatchLater,video)}
+                                    >
+                                        <span className="material-icons-outlined">{hasWatchLater ? "task_alt" : "watch_later"}</span>
                                         Watch Later
                                     </button>
                                     <button className="no-border absolute ml-7" onClick={closeModal}>
@@ -64,8 +78,8 @@ export const VideoCard = ({ id, title, videoIframe, thumbnail, creator, alt, pla
                                         <span className="material-icons-outlined">{!inPlaylist ? 'playlist_add' : 'playlist_remove'}</span>
                                         {!inPlaylist ? 'Add to Playlist' : 'Remove'}
                                     </button>
-                                    <button className="no-border cursor-pointer flex align-center mr-2" onClick={() => addToLikedVideo(video)}>
-                                        <span className={false ? "material-icons" : "material-icons-outlined"}>thumb_up</span>Like
+                                    <button className="no-border cursor-pointer flex align-center mr-2" onClick={() => likedVideoHandler(isLikedVideo,video)}>
+                                        <span className={isLikedVideo ? "material-icons" : "material-icons-outlined"}>thumb_up</span>Like
                                     </button>
                                 </div>
                             </div>
