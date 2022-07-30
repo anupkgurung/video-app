@@ -25,7 +25,7 @@ export const Home = () => {
                         {
                             categories.length > 0 && categories.map(({_id,categoryName}) => (
                                 <span className={`chip-item ${categoryName === currentCateogry ? "is-active" : ''}` } key={_id}
-                                    onClick={(e)=>getCategoryVideo(categoryName,setCurrentCategory,showToast)}>{categoryName}
+                                    onClick={(e)=>getCategoryVideo(categoryName,setCurrentCategory,setVideoList,showToast)}>{categoryName}
                                 </span>
                             ))
                         }

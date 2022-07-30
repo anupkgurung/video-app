@@ -6,3 +6,4 @@ export { VideoCard } from "./VideoCard/VideoCard";
 export { PlaylistCard } from "./PlaylistCard/PlaylistCard";
 export { Modal } from "./Modal/Modal";
 export { Toast } from "./Toast/Toast";
+export { RequiresAuth } from "./RequiresAuth/RequiresAuth"
